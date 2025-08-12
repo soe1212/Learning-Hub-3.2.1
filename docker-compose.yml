@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: learnhub_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: learnhub
+      POSTGRES_USER: learnhub_user
+      POSTGRES_PASSWORD: learnhub_password
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d
+    networks:
+      - learnhub_network
+
+  adminer:
+    image: adminer:4.8.1
+    container_name: learnhub_adminer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    networks:
+      - learnhub_network
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  learnhub_network:
+    driver: bridge

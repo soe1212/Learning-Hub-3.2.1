@@ -30,6 +30,10 @@ app.use('/api/search', require('./routes/search'));
 app.use('/api/notifications', require('./routes/notifications'));
 app.use('/api/reviews', require('./routes/reviews'));
 app.use('/api/analytics', require('./routes/analytics'));
+app.use('/api/dashboard', require('./routes/dashboard'));
+app.use('/api/categories', require('./routes/categories'));
+app.use('/api/lessons', require('./routes/lessons'));
+app.use('/api/certificates', require('./routes/certificates'));
 
 // Health check
 app.get('/health', (req, res) => {

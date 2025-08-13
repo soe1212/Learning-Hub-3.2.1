@@ -1,6 +1,6 @@
-# LearnHub - Online Learning Platform
+# LearnHub - Next.js + NestJS Learning Platform
 
-A comprehensive online learning platform built with React, TypeScript, and PostgreSQL.
+A comprehensive online learning platform built with Next.js, NestJS, TypeScript, and PostgreSQL.
 
 ## Features
 
@@ -27,10 +27,10 @@ git clone <repository-url>
 cd learnhub
 ```
 
-### 2. Install dependencies
+### 2. Install all dependencies
 
 ```bash
-npm install
+npm run install:all
 ```
 
 ### 3. Set up the database
@@ -48,21 +48,25 @@ This will:
 
 ### 4. Environment setup
 
-Copy the environment file and configure it:
+Copy the environment files and configure them:
 
 ```bash
-cp .env.example .env
+cp frontend/.env.local.example frontend/.env.local
+cp backend/.env.example backend/.env
 ```
 
-Edit `.env` file with your configuration if needed.
+Edit the environment files with your configuration if needed.
 
-### 5. Start the development server
+### 5. Start the development servers
 
 ```bash
 npm run dev
 ```
 
-The application will be available at http://localhost:5173
+The application will be available at:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:3001
+- API Documentation: http://localhost:3001/api/docs
 
 ## Database Management
 
@@ -106,13 +110,21 @@ docker-compose up -d postgres
 ## Project Structure
 
 ```
-src/
-├── components/          # React components
-├── contexts/           # React contexts (Auth, Cart)
-├── pages/              # Page components
-├── types/              # TypeScript type definitions
-├── data/               # Mock data and constants
-└── main.tsx           # Application entry point
+frontend/
+├── app/                # Next.js app directory
+├── components/         # React components
+├── lib/               # Utilities and contexts
+├── types/             # TypeScript type definitions
+└── public/            # Static assets
+
+backend/
+├── src/
+│   ├── auth/          # Authentication module
+│   ├── users/         # User management
+│   ├── courses/       # Course management
+│   ├── enrollment/    # Enrollment system
+│   └── ...           # Other modules
+└── dist/             # Compiled JavaScript
 
 database/
 ├── init/              # Database initialization scripts
@@ -125,10 +137,13 @@ docker-compose.yml     # Docker services configuration
 
 ### Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
+- `npm run dev` - Start both frontend and backend development servers
+- `npm run dev:frontend` - Start only frontend development server
+- `npm run dev:backend` - Start only backend development server
+- `npm run build` - Build both frontend and backend for production
+- `npm run install:all` - Install dependencies for all projects
+- `npm run db:migrate` - Run database migrations
+- `npm run db:seed` - Seed database with sample data
 
 ### Database Schema
 
